@@ -45,6 +45,18 @@ body {
     font-family: var(--font);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+p,
+pre {
+    margin: 0;
+}
+
 .hide {
     display: none !important;
 }
@@ -124,3 +136,18 @@ body {
 }
 
 /*clock digits/*/
+
+header,
+main,
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100vw;
+}
+
+header {
+    justify-content: space-between;
+    padding: 0 1rem;
+}
