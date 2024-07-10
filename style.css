@@ -29,11 +29,13 @@
 :root[data-theme="light"] {
     --border-highlight: rgba(0, 0, 0, 0.2);
     --background: #fbfbfe;
+    --text: #0e1116;
 }
 
 :root[data-theme="dark"] {
     --border-highlight: rgba(255, 255, 255, 0.2);
     --background: #0E1116;
+    --text: #fbfbfe;
 }
 
 /*root/*/
@@ -43,6 +45,8 @@ body {
     padding: 0;
     margin: 0;
     font-family: var(--font);
+    background-color: var(--background);
+    color: var(--text);
 }
 
 h1,
@@ -149,5 +153,22 @@ footer {
 
 header {
     justify-content: space-between;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
+}
+
+#header-controls {}
+
+button.svg-btn {
+    padding: 0;
+    outline: none;
+    border: none;
+    background: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--text);
+}
+
+button.svg-btn svg {
+    width: 100%;
+    height: 100%;
 }
