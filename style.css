@@ -31,7 +31,7 @@
     --background: #f2f8fd;
     --text: #09121b;
     --text2: #399356;
-    --modal-bgr: #09121b80;
+    --modal-bgr: #454d544d;
     --modal-border: #09121bb3;
 }
 
@@ -187,10 +187,14 @@ pre {
 
 .modal {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50lvw;
+    width: clamp(12rem,40vw,100%);
     height: 50lvh;
     z-index: 3;
 
@@ -208,6 +212,20 @@ pre {
     top: 200%;
 }
 
+#new-event-value {
+    outline: none;
+    border: none;
+    background: none;
+    color: var(--text);
+    font-family: var(--font);
+    font-weight: 700;
+    max-width: 100%;
+}
+
+#submit-event {
+    width: 2rem;
+    height: 2rem;
+}
 /*modal/*/
 
 header,
@@ -221,8 +239,7 @@ footer {
     width: 100vw;
 }
 
-header::after,
-main::after {
+main>section::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -267,11 +284,6 @@ button.svg-btn svg {
     transition: transform 0.2s ease-in-out;
 }
 
-button.svg-btn:hover svg {
-    transform: scale(1.2);
-    color: var(--text2);
-}
-
 #theme-toggle {
     transition: none;
 }
@@ -289,3 +301,10 @@ button.svg-btn:hover svg {
 }
 
 /*header/*/
+
+@media (pointer: fine) {
+    button.svg-btn:hover svg {
+        transform: scale(1.2);
+        color: var(--text2);
+    }
+}
