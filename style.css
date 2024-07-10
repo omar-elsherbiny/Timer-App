@@ -28,14 +28,20 @@
 
 :root[data-theme="light"] {
     --border-highlight: rgba(0, 0, 0, 0.2);
-    --background: #fbfbfe;
-    --text: #0e1116;
+    --background: #f2f8fd;
+    --text: #09121b;
+    --text2: #399356;
+    --modal-bgr: #09121b80;
+    --modal-border: #09121bb3;
 }
 
 :root[data-theme="dark"] {
     --border-highlight: rgba(255, 255, 255, 0.2);
-    --background: #0E1116;
-    --text: #fbfbfe;
+    --background: #09121b;
+    --text: #f2f8fd;
+    --text2: #3cc367;
+    --modal-bgr: #f2f8fd33;
+    --modal-border: #f2f8fd80;
 }
 
 /*root/*/
@@ -184,11 +190,11 @@ pre {
     z-index: 3;
 
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--modal-bgr);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(1rem);
     -webkit-backdrop-filter: blur(1rem);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--modal-border);
 
     transition: top 0.5s ease-in-out;
 }
@@ -233,11 +239,18 @@ button.svg-btn {
     width: 1.5rem;
     height: 1.5rem;
     color: var(--text);
+    cursor: pointer;
 }
 
 button.svg-btn svg {
     width: 100%;
     height: 100%;
+    transition: transform 0.2s ease-in-out;
+}
+
+button.svg-btn:hover svg {
+    transform: scale(1.2);
+    color: var(--text2);
 }
 
 #theme-toggle {
