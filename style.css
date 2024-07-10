@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
+/*root*/
 :root {
     --shadow-elevation-low:
         0.5px 0.6px 0.8px hsl(var(--shadow-color) / 0.15),
@@ -35,8 +36,91 @@
     --background: #0E1116;
 }
 
+/*root/*/
+
+/*setup*/
 body {
     padding: 0;
     margin: 0;
     font-family: var(--font);
 }
+
+.hide {
+    display: none !important;
+}
+
+/*setup/*/
+
+/*general*/
+.scroll {
+    overflow-y: auto;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 3pt;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: var(--border-highlight);
+    border-radius: 50px;
+    background-clip: content-box;
+}
+
+.scroll::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+.scroll-moz {
+    scrollbar-color: var(--border-highlight) transparent;
+}
+
+/*general/*/
+
+/*clock digits*/
+.clock-digit-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+}
+
+.digit {
+    position: relative;
+    width: 7px;
+    height: 1.2rem;
+    overflow: hidden;
+    transition: width 0.2s ease-in-out;
+}
+
+.clock-digit-container p {
+    background-color: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.digit p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 150%);
+    transition: transform 0.6s cubic-bezier(.28, -0.05, .57, 1.5), opacity 0.6s cubic-bezier(.28, -0.05, .57, 1.5);
+    opacity: 0.7;
+}
+
+.digit p.current {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+.digit p.out {
+    transform: translate(-50%, -150%);
+    opacity: 0.5;
+}
+
+/*clock digits/*/
