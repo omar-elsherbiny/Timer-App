@@ -1,7 +1,10 @@
+const themeToggle = document.getElementById('theme-toggle');
 const lightThemeIcon = document.getElementById('light-theme-icon');
 const darkThemeIcon = document.getElementById('dark-theme-icon');
+const addEvent = document.getElementById('add-event');
+const modalContainer = document.querySelector('.modal-container');
+const backdrop = document.querySelector('.backdrop');
 
-let themeToggle = document.getElementById('theme-toggle');
 let storedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 if (storedTheme) {
     document.documentElement.setAttribute('data-theme', storedTheme)
@@ -67,6 +70,14 @@ const nEvents = localStorage.getItem('nEvents') || 0;
 for (let i = 0; i < nEvents; i++) {
 
 }
+
+addEvent.addEventListener('click', e => {
+    modalContainer.classList.remove('hidden');
+});
+
+backdrop.addEventListener('click', e => {
+    modalContainer.classList.add('hidden');
+});
 // time management
 
 if (navigator.userAgent.includes('Firefox')) {
