@@ -49,6 +49,25 @@ function setClock(digits, arr) {
     });
 }
 // clock digits
+function getRemainingTime(currentDate, targetDate) {
+    if (targetDate < currentDate) {
+        return null;
+    }
+    const difference = targetDate.getTime() - currentDate.getTime();
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    return [days, hours, minutes, seconds];
+}
+
+const nEvents = localStorage.getItem('nEvents') || 0;
+for (let i = 0; i < nEvents; i++) {
+
+}
+// time management
 
 if (navigator.userAgent.includes('Firefox')) {
     document.querySelectorAll('.scroll').forEach(element => {
