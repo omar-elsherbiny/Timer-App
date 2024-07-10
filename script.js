@@ -4,6 +4,8 @@ const darkThemeIcon = document.getElementById('dark-theme-icon');
 const addEvent = document.getElementById('add-event');
 const modalContainer = document.querySelector('.modal-container');
 const backdrop = document.querySelector('.backdrop');
+const newEventValue = document.getElementById('new-event-value');
+const submitEvent = document.getElementById('submit-event');
 
 let storedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 if (storedTheme) {
@@ -52,6 +54,10 @@ function setClock(digits, arr) {
     });
 }
 // clock digits
+function addTimeEvent(date) {
+    
+}
+
 function getRemainingTime(currentDate, targetDate) {
     if (targetDate < currentDate) {
         return null;
@@ -77,6 +83,16 @@ addEvent.addEventListener('click', e => {
 
 backdrop.addEventListener('click', e => {
     modalContainer.classList.add('hidden');
+});
+
+submitEvent.addEventListener('click', e => {
+    if (newEventValue.value) {
+        submitEvent.classList.remove('invalid');
+        modalContainer.classList.add('hidden');
+        console.log(newEventValue.value);
+    } else {
+        submitEvent.classList.add('invalid');
+    }
 });
 // time management
 
