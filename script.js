@@ -53,9 +53,10 @@ function setClock(digits, arr) {
         }
     });
 }
+// setClock(document.querySelectorAll('#main-time .digit'),['', '','',5,0,1,3,0,5,0])
 // clock digits
 function addTimeEvent(date) {
-    
+
 }
 
 function getRemainingTime(currentDate, targetDate) {
