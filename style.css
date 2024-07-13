@@ -167,79 +167,25 @@ pre {
 
 /*clock digits/*/
 
-/*modal*/
-.modal-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    overflow-y: hidden;
-    pointer-events: auto;
-}
-
-.modal-container.hidden {
-    pointer-events: none;
-}
-
-.backdrop {
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(0.1rem);
-    -webkit-backdrop-filter: blur(0.1rem);
-    transition: opacity 0.5s ease-in-out;
-}
-
-.hidden .backdrop {
-    opacity: 0;
-}
-
-.modal {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: clamp(12rem, 40vw, 100%);
-    height: 50lvh;
-    z-index: 3;
-
-    border-radius: 1rem;
-    background: var(--modal-bgr);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--modal-border);
-
-    transition: top 0.5s ease-in-out;
-}
-
-.hidden .modal {
-    top: 200%;
-}
-
-#modal-title {
-    text-align: center;
-}
-
-#new-event-value {
+/*svg-btn*/
+button.svg-btn {
+    padding: 0;
     outline: none;
     border: none;
     background: none;
+    width: 1.5rem;
+    height: 1.5rem;
     color: var(--text);
-    font-family: var(--font);
-    font-weight: 700;
-    max-width: 90%;
+    cursor: pointer;
 }
 
-#submit-event {
-    width: 2rem;
-    height: 2rem;
+button.svg-btn svg {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.2s ease-in-out;
 }
 
-/*modal/*/
+/*svg-btn/*/
 
 header,
 main,
@@ -268,23 +214,6 @@ header {
     margin-right: 0.5rem;
 }
 
-button.svg-btn {
-    padding: 0;
-    outline: none;
-    border: none;
-    background: none;
-    width: 1.5rem;
-    height: 1.5rem;
-    color: var(--text);
-    cursor: pointer;
-}
-
-button.svg-btn svg {
-    width: 100%;
-    height: 100%;
-    transition: transform 0.2s ease-in-out;
-}
-
 #theme-toggle {
     transition: none;
 }
@@ -293,45 +222,7 @@ button.svg-btn svg {
 
 /*main*/
 main {
-    flex-direction: column;
-    justify-content: space-evenly;
     flex: 1;
-}
-
-main>section {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 0.5rem 0;
-    max-height: 30%;
-}
-
-main>section::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 1rem;
-    height: 2pt;
-    width: clamp(9rem, 20%, 20rem);
-    background-color: var(--border-highlight);
-}
-
-#main-title,
-#main-time {
-    color: var(--text2);
-}
-
-#main-time.clock-digit-container p {
-    font-size: 1.5rem;
-}
-
-#main-time.clock-digit-container .digit {
-    height: 1.5rem;
 }
 
 /*main/*/

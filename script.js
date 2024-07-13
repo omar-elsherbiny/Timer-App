@@ -55,9 +55,6 @@ function setClock(digits, arr) {
 }
 // setClock(document.querySelectorAll('#main-time .digit'),['', '','',5,0,1,3,0,5,0])
 // clock digits
-function addTimeEvent(date) {
-
-}
 
 function getRemainingTime(currentDate, targetDate) {
     if (targetDate < currentDate) {
@@ -72,30 +69,6 @@ function getRemainingTime(currentDate, targetDate) {
 
     return [days, hours, minutes, seconds];
 }
-
-const nEvents = localStorage.getItem('nEvents') || 0;
-for (let i = 0; i < nEvents; i++) {
-
-}
-
-addEvent.addEventListener('click', e => {
-    modalContainer.classList.remove('hidden');
-});
-
-backdrop.addEventListener('click', e => {
-    modalContainer.classList.add('hidden');
-});
-
-submitEvent.addEventListener('click', e => {
-    if (newEventValue.value) {
-        submitEvent.classList.remove('invalid');
-        modalContainer.classList.add('hidden');
-        console.log(newEventValue.value);
-    } else {
-        submitEvent.classList.add('invalid');
-    }
-});
-// time management
 
 if (navigator.userAgent.includes('Firefox')) {
     document.querySelectorAll('.scroll').forEach(element => {
