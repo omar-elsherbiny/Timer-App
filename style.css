@@ -53,6 +53,9 @@ body {
     font-family: var(--font);
     background-color: var(--background);
     color: var(--text);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 body,
@@ -292,6 +295,7 @@ button.svg-btn svg {
 main {
     flex-direction: column;
     justify-content: space-evenly;
+    flex: 1;
 }
 
 main>section {
@@ -301,6 +305,8 @@ main>section {
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding: 0.5rem 0;
+    max-height: 30%;
 }
 
 main>section::after {
@@ -311,7 +317,7 @@ main>section::after {
     transform: translateX(-50%);
     border-radius: 1rem;
     height: 2pt;
-    width: 20%;
+    width: clamp(9rem, 20%, 20rem);
     background-color: var(--border-highlight);
 }
 
@@ -329,6 +335,13 @@ main>section::after {
 }
 
 /*main/*/
+
+/*footer*/
+footer {
+    padding: 0.5rem 0;
+}
+
+/*footer/*/
 
 @media (pointer: fine) {
     button.svg-btn:hover svg {
