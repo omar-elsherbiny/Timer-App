@@ -187,6 +187,27 @@ button.svg-btn svg {
 
 /*svg-btn/*/
 
+/*link*/
+.link {
+    position: relative;
+    text-decoration: none;
+    color: var(--text1);
+}
+
+.link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3pt;
+    width: 100%;
+    opacity: 0.5;
+    background-color: var(--text2);
+    transition: all ease-in-out 0.2s;
+}
+
+/*link/*/
+
 header,
 main,
 footer {
@@ -202,6 +223,7 @@ header {
     justify-content: space-between;
     padding: 0.2rem 0.7rem;
     border-bottom: solid 2pt var(--border-highlight);
+    height: 41.6px;
 }
 
 #header-controls {
@@ -222,14 +244,54 @@ header {
 
 /*main*/
 main {
+    position: relative;
+    flex-direction: column;
+    justify-content: space-evenly;
     flex: 1;
+    max-height: calc(100vh - 34.4px - 41.6px);
+}
+
+main::before,
+main::after {
+    content: '';
+    position: absolute;
+    top: 33%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1rem;
+    height: 2pt;
+    width: clamp(9rem, 20%, 20rem);
+    background-color: var(--border-highlight);
+}
+
+main::after {
+    top: 66%;
+}
+
+main>section {
+    flex: 1;
+    margin: 0.2rem 0.7rem;
 }
 
 /*main/*/
 
 /*footer*/
 footer {
+    position: relative;
     padding: 0.5rem 0;
+    height: 34.4px;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1rem;
+    height: 2pt;
+    width: clamp(9rem, 13%, 15rem);
+    background-color: var(--border-highlight);
 }
 
 /*footer/*/
@@ -243,5 +305,9 @@ footer {
     button.svg-btn.invalid svg,
     button.svg-btn.invalid:hover svg {
         color: #c33c3c;
+    }
+
+    .link:hover::after {
+        height: 90%;
     }
 }
