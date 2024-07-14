@@ -290,7 +290,7 @@ footer::before {
     transform: translateX(-50%);
     border-radius: 1rem;
     height: 2pt;
-    width: clamp(9rem, 13%, 15rem);
+    width: clamp(6rem, 13%, 10rem);
     background-color: var(--border-highlight);
 }
 
