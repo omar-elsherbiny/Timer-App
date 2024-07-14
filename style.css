@@ -265,11 +265,21 @@ main>section {
 }
 
 .section-break {
-    border-radius: 1rem;
+    position: relative;
+    height: 2pt;
+    width: 100%;
+}
+
+.section-break::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     height: 2pt;
     width: clamp(9rem, 20%, 20rem);
     background-color: var(--border-highlight);
-    margin: 0;
+    border-radius: 1rem;
 }
 
 /*main/*/
