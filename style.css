@@ -31,7 +31,8 @@
     --background: #f2f8fd;
     --text: #09121b;
     --text2: #2eb85a;
-    --modal-bgr: #454d544d;
+    --panel-bgr: #bec4ca;
+    --modal-bgr: #454d5480;
     --modal-border: #09121bb3;
 }
 
@@ -40,7 +41,8 @@
     --background: #09121b;
     --text: #f2f8fd;
     --text2: #3cc367;
-    --modal-bgr: #f2f8fd33;
+    --panel-bgr: #374049;
+    --modal-bgr: #f2f8fd80;
     --modal-border: #f2f8fd80;
 }
 
@@ -286,7 +288,7 @@ main>section {
 }
 
 .time-panel {
-    background-color: var(--modal-bgr);
+    background-color: var(--panel-bgr);
     color: var(--text);
     box-shadow: var(--shadow-elevation-medium);
     border-radius: 1rem;
@@ -303,6 +305,62 @@ footer {
 }
 
 /*footer/*/
+
+/*modal*/
+.modal-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: hidden;
+    pointer-events: none;
+}
+
+.modal-container.visible {
+    pointer-events: auto;
+}
+
+.backdrop {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(0.1rem);
+    -webkit-backdrop-filter: blur(0.1rem);
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+}
+
+.visible .backdrop {
+    opacity: 1;
+}
+
+.modal {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    top: 200%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(12rem, 40vw, 100%);
+    height: 50lvh;
+    z-index: 3;
+
+    border-radius: 1rem;
+    background: var(--modal-bgr);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--modal-border);
+
+    transition: top 0.5s ease-in-out;
+}
+
+.visible .modal {
+    top: 50%;
+}
+
+/*modal/*/
 
 @media (pointer: fine) {
     button.svg-btn:hover svg {

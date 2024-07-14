@@ -4,8 +4,6 @@ const darkThemeIcon = document.getElementById('dark-theme-icon');
 const addEvent = document.getElementById('add-event');
 const modalContainer = document.querySelector('.modal-container');
 const backdrop = document.querySelector('.backdrop');
-const newEventValue = document.getElementById('new-event-value');
-const submitEvent = document.getElementById('submit-event');
 
 let storedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 if (storedTheme) {
@@ -69,6 +67,18 @@ function getRemainingTime(currentDate, targetDate) {
 
     return [days, hours, minutes, seconds];
 }
+
+// time management
+
+addEvent.addEventListener('click', e => {
+    modalContainer.classList.add('visible');
+});
+
+backdrop.addEventListener('click', e => {
+    modalContainer.classList.remove('visible');
+});
+
+// add event modal
 
 if (navigator.userAgent.includes('Firefox')) {
     document.querySelectorAll('.scroll').forEach(element => {
