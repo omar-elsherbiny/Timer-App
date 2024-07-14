@@ -30,7 +30,7 @@
     --border-highlight: rgba(0, 0, 0, 0.2);
     --background: #f2f8fd;
     --text: #09121b;
-    --text2: #399356;
+    --text2: #2eb85a;
     --modal-bgr: #454d544d;
     --modal-border: #09121bb3;
 }
@@ -175,7 +175,7 @@ button.svg-btn {
     background: none;
     width: 1.5rem;
     height: 1.5rem;
-    color: var(--text);
+    color: inherit;
     cursor: pointer;
 }
 
@@ -216,6 +216,27 @@ button.svg-btn:active svg {
 }
 
 /*link/*/
+
+/*section break*/
+.section-break {
+    position: relative;
+    height: 2pt;
+    width: 100%;
+}
+
+.section-break::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 2pt;
+    width: clamp(9rem, 20%, 20rem);
+    background-color: var(--border-highlight);
+    border-radius: 1rem;
+}
+
+/*section break/*/
 
 header,
 main,
@@ -264,22 +285,12 @@ main>section {
     margin: 0.3rem 0.7rem;
 }
 
-.section-break {
-    position: relative;
-    height: 2pt;
-    width: 100%;
-}
-
-.section-break::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 2pt;
-    width: clamp(9rem, 20%, 20rem);
-    background-color: var(--border-highlight);
+.time-panel {
+    background-color: var(--modal-bgr);
+    color: var(--text);
+    box-shadow: var(--shadow-elevation-medium);
     border-radius: 1rem;
+    padding: 0.7rem;
 }
 
 /*main/*/
