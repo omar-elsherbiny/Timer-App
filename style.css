@@ -185,6 +185,11 @@ button.svg-btn svg {
     transition: transform 0.2s ease-in-out;
 }
 
+button.svg-btn:active svg {
+    transform: scale(1.2);
+    color: var(--text2);
+}
+
 /*svg-btn/*/
 
 /*link*/
@@ -204,6 +209,10 @@ button.svg-btn svg {
     opacity: 0.5;
     background-color: var(--text2);
     transition: all ease-in-out 0.2s;
+}
+
+.link:active::after {
+    height: 90%;
 }
 
 /*link/*/
@@ -251,26 +260,16 @@ main {
     max-height: calc(100vh - 34.4px - 41.6px);
 }
 
-main::before,
-main::after {
-    content: '';
-    position: absolute;
-    top: 33%;
-    left: 50%;
-    transform: translateX(-50%);
+main>section {
+    margin: 0.3rem 0.7rem;
+}
+
+.section-break {
     border-radius: 1rem;
     height: 2pt;
     width: clamp(9rem, 20%, 20rem);
     background-color: var(--border-highlight);
-}
-
-main::after {
-    top: 66%;
-}
-
-main>section {
-    flex: 1;
-    margin: 0.2rem 0.7rem;
+    margin: 0;
 }
 
 /*main/*/
@@ -280,18 +279,6 @@ footer {
     position: relative;
     padding: 0.5rem 0;
     height: 34.4px;
-}
-
-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 1rem;
-    height: 2pt;
-    width: clamp(6rem, 13%, 10rem);
-    background-color: var(--border-highlight);
 }
 
 /*footer/*/
