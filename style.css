@@ -27,7 +27,7 @@
 }
 
 :root[data-theme="light"] {
-    --border-highlight: rgba(0, 0, 0, 0.2);
+    --border-highlight: rgba(0, 0, 0, 0.4);
     --background: #f2f8fd;
     --text: #09121b;
     --text2: #2eb85a;
@@ -37,7 +37,7 @@
 }
 
 :root[data-theme="dark"] {
-    --border-highlight: rgba(255, 255, 255, 0.2);
+    --border-highlight: rgba(255, 255, 255, 0.4);
     --background: #09121b;
     --text: #f2f8fd;
     --text2: #3cc367;
@@ -373,7 +373,7 @@ main>section {
 .time-panel.sub {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin: 0.5rem 0;
 }
 
@@ -455,6 +455,43 @@ footer {
 
 .visible .modal {
     top: 50%;
+}
+
+#modal-title {
+    text-align: center;
+}
+
+#event-title-input {
+    outline: none;
+    border: none;
+    background-color: var(--text);
+    color: var(--background);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-elevation-medium);
+    padding: 0.2rem 0.4rem;
+    font-family: var(--font);
+    font-weight: 700;
+    min-width: 15rem;
+    max-width: 90%;
+}
+
+#event-time-input {
+    outline: none;
+    border: none;
+    background-color: var(--text);
+    color: var(--background);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-elevation-medium);
+    padding: 0.2rem 0.4rem;
+    font-family: var(--font);
+    font-weight: 700;
+    min-width: 15rem;
+    max-width: 90%;
+}
+
+#submit-event {
+    width: 2rem;
+    height: 2rem;
 }
 
 /*modal/*/
