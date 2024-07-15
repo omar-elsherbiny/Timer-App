@@ -80,46 +80,6 @@ backdrop.addEventListener('click', e => {
 
 // add event modal
 
-function createRotatingCard(elementContainer) {
-    const element = elementContainer.children[0];
-
-    elementContainer.addEventListener('mouseenter', e => {
-        element.style.transition = `transform 100ms ease-in-out, scale 150ms ease, box-shadow 150ms ease`;
-        const aTimeout = setTimeout(() => {
-            rotateCard(e);
-        }, 50);
-        const anotherTimeout = setTimeout(() => {
-            element.style.transition = `scale 150ms ease, box-shadow 150ms ease`;
-            elementContainer.addEventListener('mousemove', rotateCard);
-        }, 100);
-
-        elementContainer.addEventListener('mouseleave', e => {
-            clearTimeout(aTimeout);
-            clearTimeout(anotherTimeout);
-
-            elementContainer.removeEventListener('mousemove', rotateCard);
-            element.style.transition = `transform 100ms ease-in-out, scale 150ms ease, box-shadow 150ms ease`;
-            element.style.transform = ``;
-        });
-    })
-
-    function rotateCard(e) {
-        const mousePos = {
-            x: (((e.clientX - elementContainer.getBoundingClientRect().x) / elementContainer.getBoundingClientRect().width * (45 / 2)) - (45 / 2) / 1.5),
-            y: (((e.clientY - elementContainer.getBoundingClientRect().y) / elementContainer.getBoundingClientRect().height * (45 / 2)) - (45 / 2) / 1.5)
-        }; //  scale(1.025)
-        element.style.transform = `rotateY(${mousePos.x}deg) rotateX(${-mousePos.y}deg)`;
-    }
-}
-
-document.querySelectorAll('section').forEach(section => {
-    createRotatingCard(section);
-});
-
-createRotatingCard(modalContainer)
-
-// rotate panels
-
 if (navigator.userAgent.includes('Firefox')) {
     document.querySelectorAll('.scroll').forEach(element => {
         element.classList.add('scroll-moz');

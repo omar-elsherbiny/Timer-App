@@ -293,6 +293,34 @@ main>section {
     box-shadow: var(--shadow-elevation-medium);
     border-radius: 1rem;
     padding: 0.7rem;
+    min-width: 15rem;
+}
+
+.time-panel.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.time-panel.main .time-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.time-panel-content {
+    color: var(--text2);
+}
+
+.time-panel-content.clock-digit-container .digit {
+    width: 10px;
+    height: 1.7em;
+}
+
+.time-panel-content.clock-digit-container p {
+    font-size: 1.5em;
 }
 
 /*main/*/
@@ -344,7 +372,7 @@ footer {
     top: 200%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: clamp(12rem, 40vw, 100%);
+    width: clamp(17rem, 40vw, 100%);
     height: 50lvh;
     z-index: 3;
 
