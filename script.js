@@ -1,9 +1,12 @@
 const themeToggle = document.getElementById('theme-toggle');
 const lightThemeIcon = document.getElementById('light-theme-icon');
 const darkThemeIcon = document.getElementById('dark-theme-icon');
-const addEvent = document.getElementById('add-event');
+const addEventBtn = document.getElementById('add-event-btn');
 const modalContainer = document.querySelector('.modal-container');
 const backdrop = document.querySelector('.backdrop');
+const submitEventBtn = document.getElementById('submit-event-btn');
+const eventTitleInput = document.getElementById('event-title-input');
+const eventTimeInput = document.getElementById('event-time-input');
 
 let storedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 if (storedTheme) {
@@ -68,9 +71,32 @@ function getRemainingTime(currentDate, targetDate) {
     return [days, hours, minutes, seconds];
 }
 
+let futureEventsArr = JSON.parse(localStorage.getItem('futureEvents')) || []
+let pastEventsArr = JSON.parse(localStorage.getItem('pastEvents')) || []
+
+function checkEventValid() {
+    if (eventTitleInput.value && eventTimeInput.value) {
+        submitEventBtn.classList.remove('invalid');
+        return true
+    } else {
+        submitEventBtn.classList.add('invalid');
+        return false
+    }
+}
+
+eventTitleInput.addEventListener('input', checkEventValid);
+eventTimeInput.addEventListener('input', checkEventValid);
+
+submitEventBtn.addEventListener('click', e => {
+    if (checkEventValid()) {
+        modalContainer.classList.remove('visible');
+        console.log(Date.parse(eventTimeInput.value));
+    }
+});
+
 // time management
 
-addEvent.addEventListener('click', e => {
+addEventBtn.addEventListener('click', e => {
     modalContainer.classList.add('visible');
 });
 

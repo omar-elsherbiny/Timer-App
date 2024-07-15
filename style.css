@@ -192,6 +192,10 @@ button.svg-btn:active svg {
     color: var(--text2);
 }
 
+button.svg-btn.invalid svg {
+    color: #c33c3c;
+}
+
 /*svg-btn/*/
 
 /*link*/
@@ -475,6 +479,13 @@ footer {
     max-width: 90%;
 }
 
+input:-webkit-autofill#event-title-input,
+input:-webkit-autofill#event-title-input:hover,
+input:-webkit-autofill#event-title-input:focus,
+input:-webkit-autofill#event-title-input:active {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+
 #event-time-input {
     outline: none;
     border: none;
@@ -489,7 +500,11 @@ footer {
     max-width: 90%;
 }
 
-#submit-event {
+:root[data-theme="light"] #event-time-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+#submit-event-btn {
     width: 2rem;
     height: 2rem;
 }
@@ -502,7 +517,6 @@ footer {
         color: var(--text2);
     }
 
-    button.svg-btn.invalid svg,
     button.svg-btn.invalid:hover svg {
         color: #c33c3c;
     }
