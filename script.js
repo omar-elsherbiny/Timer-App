@@ -8,10 +8,60 @@ const submitEventBtn = document.getElementById('submit-event-btn');
 const eventTitleInput = document.getElementById('event-title-input');
 const eventTimeInput = document.getElementById('event-time-input');
 
-let storedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-if (storedTheme) {
-    document.documentElement.setAttribute('data-theme', storedTheme)
-    if (storedTheme === 'dark') {
+class StoredValue {
+    constructor(localStorageName, defaultValue = false, updateCallback = (self) => { }) {
+        this._name = localStorageName;
+        this._callback = updateCallback;
+        try {
+            this._value = JSON.parse(localStorage.getItem(this._name));
+            if (this._value == null) throw new Error('');
+        } catch (e) {
+            this._value = defaultValue;
+            this._callback(this);
+        }
+    }
+    update() {
+        localStorage.setItem(this._name, this._value);
+        this._callback(this);
+    }
+    get val() {
+        return this._value;
+    }
+    set val(value) {
+        this._value = value;
+        localStorage.setItem(this._name, JSON.stringify(this._value));
+        this.update();
+    }
+}
+
+class StoredArray {
+    constructor(localStorageName) {
+        this._name = localStorageName;
+        this._array = JSON.parse(localStorage.getItem(this._name)) || [];
+    }
+    update() {
+        localStorage.setItem(this._name, JSON.stringify(this._array));
+    }
+    get arr() {
+        return this._array;
+    }
+    set arr(value) {
+        this._array = value;
+        localStorage.setItem(this._name, JSON.stringify(this._array));
+        this.update();
+    }
+    push(...elements) {
+        this.arr.push(...elements);
+        this.update();
+    }
+    remove(element) {
+        this._array = this._array.filter(e => { return e !== element });
+        this.update();
+    }
+}
+
+let storedTheme = new StoredValue('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'), (self) => {
+    if (self._value === 'dark') {
         lightThemeIcon.classList.add('hide');
         darkThemeIcon.classList.remove('hide');
     }
@@ -19,17 +69,11 @@ if (storedTheme) {
         lightThemeIcon.classList.remove('hide');
         darkThemeIcon.classList.add('hide');
     }
-}
+    document.documentElement.setAttribute('data-theme', self._value);
+})
+
 themeToggle.addEventListener('click', function () {
-    let currentTheme = document.documentElement.getAttribute('data-theme');
-    let targetTheme = 'light';
-    if (currentTheme === 'light') {
-        targetTheme = 'dark';
-    }
-    lightThemeIcon.classList.toggle('hide');
-    darkThemeIcon.classList.toggle('hide');
-    document.documentElement.setAttribute('data-theme', targetTheme);
-    localStorage.setItem('theme', targetTheme);
+    storedTheme.val = storedTheme.val == 'dark' ? 'light' : 'dark';
 });
 // theme switch
 
@@ -71,8 +115,8 @@ function getRemainingTime(currentDate, targetDate) {
     return [days, hours, minutes, seconds];
 }
 
-let futureEventsArr = JSON.parse(localStorage.getItem('futureEvents')) || []
-let pastEventsArr = JSON.parse(localStorage.getItem('pastEvents')) || []
+let futureEventsArr = new StoredArray('futureEvents');
+let pastEventsArr = new StoredArray('pastEvents');
 
 function checkEventValid() {
     if (eventTitleInput.value && eventTimeInput.value) {
