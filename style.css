@@ -296,6 +296,31 @@ main>section {
     min-width: 15rem;
 }
 
+.time-panel-content {
+    color: var(--text2);
+}
+
+
+.time-panel-content.clock-digit-container .tag {
+    position: relative;
+}
+
+.time-panel-content.clock-digit-container .tag::before {
+    position: absolute;
+    bottom: 100%;
+    right: 100%;
+    transform: translateY(-55%);
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+.time-panel .time-panel-delete {
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+/*common//*/
+
 .time-panel.main {
     display: flex;
     flex-direction: column;
@@ -310,34 +335,18 @@ main>section {
     width: 100%;
 }
 
-.time-panel-content {
-    color: var(--text2);
-}
 
 .time-panel.main .time-panel-content {
     padding-top: 1.3rem;
 }
 
-.time-panel-content.clock-digit-container .digit {
+.time-panel.main .time-panel-content.clock-digit-container .digit {
     width: 10px;
     height: 1.7em;
 }
 
-.time-panel-content.clock-digit-container p {
+.time-panel.main .time-panel-content.clock-digit-container p {
     font-size: 1.5em;
-}
-
-.time-panel-content.clock-digit-container .tag {
-    position: relative;
-}
-
-.time-panel-content.clock-digit-container .tag::before {
-    position: absolute;
-    bottom: 100%;
-    right: 100%;
-    transform: translateY(-55%);
-    font-weight: 300;
-    font-size: 1.2rem;
 }
 
 .tag.day::before {
@@ -354,6 +363,21 @@ main>section {
 
 .tag.sec::before {
     content: 'sec';
+}
+
+.time-panel.sub {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.time-panel.sub .time-panel-content.clock-digit-container .digit {
+    width: 8px;
+    height: 1.33em;
+}
+
+.time-panel.sub .time-panel-content.clock-digit-container p {
+    font-size: 1.33em;
 }
 
 /*main/*/
