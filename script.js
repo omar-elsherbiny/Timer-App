@@ -60,17 +60,21 @@ class StoredArray {
     }
 }
 
-let storedTheme = new StoredValue('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'), (self) => {
-    if (self._value === 'dark') {
-        lightThemeIcon.classList.add('hide');
-        darkThemeIcon.classList.remove('hide');
+let storedTheme = new StoredValue(
+    'theme',
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+    (self) => {
+        if (self._value === 'dark') {
+            lightThemeIcon.classList.add('hide');
+            darkThemeIcon.classList.remove('hide');
+        }
+        else {
+            lightThemeIcon.classList.remove('hide');
+            darkThemeIcon.classList.add('hide');
+        }
+        document.documentElement.setAttribute('data-theme', self._value);
     }
-    else {
-        lightThemeIcon.classList.remove('hide');
-        darkThemeIcon.classList.add('hide');
-    }
-    document.documentElement.setAttribute('data-theme', self._value);
-})
+)
 
 themeToggle.addEventListener('click', function () {
     storedTheme.val = storedTheme.val == 'dark' ? 'light' : 'dark';
@@ -118,6 +122,9 @@ function getRemainingTime(currentDate, targetDate) {
 let futureEventsArr = new StoredArray('futureEvents');
 let pastEventsArr = new StoredArray('pastEvents');
 
+console.log(futureEventsArr.arr);
+console.log(pastEventsArr.arr);
+
 function checkEventValid() {
     if (eventTitleInput.value && eventTimeInput.value) {
         submitEventBtn.classList.remove('invalid');
@@ -134,7 +141,20 @@ eventTimeInput.addEventListener('input', checkEventValid);
 submitEventBtn.addEventListener('click', e => {
     if (checkEventValid()) {
         modalContainer.classList.remove('visible');
-        console.log(Date.parse(eventTimeInput.value));
+        let eventTime = Date.parse(eventTimeInput.value);
+        if (new Date().getTime() < eventTime) {
+            futureEventsArr.push({
+                id: Math.round(Math.random() * 10000).toString().padStart(5, 0),
+                title: eventTitleInput.value,
+                time: eventTime
+            })
+        } else {
+            pastEventsArr.push({
+                id: Math.round(Math.random() * 10000).toString().padStart(5, 0),
+                title: eventTitleInput.value,
+                time: eventTime
+            })
+        }
     }
 });
 
