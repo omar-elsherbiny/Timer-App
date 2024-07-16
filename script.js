@@ -129,9 +129,6 @@ function getRemainingTime(currentDate, targetDate) {
 let futureEventsArr = new StoredArray('futureEvents');
 let pastEventsArr = new StoredArray('pastEvents');
 
-console.log(futureEventsArr.arr);
-console.log(pastEventsArr.arr);
-
 function getPastPanel() {
     let element = document.createElement('div');
     element.classList.add('time-panel', 'sub')
@@ -375,6 +372,7 @@ submitEventBtn.addEventListener('click', e => {
                 time: eventTime
             })
         }
+        updatePanels();
     }
 });
 
@@ -397,4 +395,17 @@ if (navigator.userAgent.includes('Firefox')) {
 }
 
 updatePanels();
+
+function getDelayUntilNextMinute() {
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const milliseconds = now.getMilliseconds();
+    return (60 * 1000) - (seconds * 1000 + milliseconds);
+}
+
+setTimeout(function () {
+    setInterval(() => {
+        updatePanels();
+    }, 60 * 1000);
+}, getDelayUntilNextMinute());
 // main run

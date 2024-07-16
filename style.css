@@ -302,7 +302,15 @@ main>section {
     box-shadow: var(--shadow-elevation-medium);
     border-radius: 1rem;
     padding: 0.7rem;
-    width: clamp(15rem, 30%, 30rem);
+    min-width: 8rem;
+}
+
+.time-panel-title {
+    margin-right: 0.5rem;
+}
+
+.time-panel-delete {
+    margin-left: 0.5rem;
 }
 
 .time-panel-content {
@@ -335,6 +343,7 @@ main>section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: clamp(15rem, 30%, 30rem);
 }
 
 .time-panel.main .time-panel-header {
