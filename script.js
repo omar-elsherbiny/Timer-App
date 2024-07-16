@@ -104,7 +104,6 @@ function setClock(digits, arr) {
         }
     });
 }
-// setClock(document.querySelectorAll('#main-time .digit'),['', '','',5,0,1,3,0,5,0])
 // clock digits
 
 function getRemainingTime(currentDate, targetDate) {
@@ -394,18 +393,16 @@ if (navigator.userAgent.includes('Firefox')) {
     });
 }
 
-updatePanels();
-
-function getDelayUntilNextMinute() {
+function getDelayUntilNextSecond() {
     const now = new Date();
-    const seconds = now.getSeconds();
     const milliseconds = now.getMilliseconds();
-    return (60 * 1000) - (seconds * 1000 + milliseconds);
+    return (1000) - milliseconds;
 }
 
+updatePanels();
 setTimeout(function () {
     setInterval(() => {
         updatePanels();
-    }, 60 * 1000);
-}, getDelayUntilNextMinute());
+    }, 1000);
+}, getDelayUntilNextSecond());
 // main run
