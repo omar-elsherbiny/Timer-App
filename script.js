@@ -125,6 +125,187 @@ let pastEventsArr = new StoredArray('pastEvents');
 console.log(futureEventsArr.arr);
 console.log(pastEventsArr.arr);
 
+function getPastPanel() {
+    let element = document.createElement('div');
+    element.classList.add('time-panel', 'sub')
+    element.innerHTML = `
+    <h4 class="time-panel-title">Exam Results</h4>
+    <button class="svg-btn time-panel-delete">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
+            <path fill="currentColor"
+                d="m232.49 80.49l-128 128a12 12 0 0 1-17 0l-56-56a12 12 0 1 1 17-17L96 183L215.51 63.51a12 12 0 0 1 17 17Z" />
+        </svg>
+    </button>
+    `
+    return element;
+}
+
+function getFuturePanel() {
+    let element = document.createElement('div');
+    element.classList.add('time-panel', 'sub')
+    element.innerHTML = `
+    <h4 class="time-panel-title"></h4>
+    <div class="time-panel-content clock-digit-container">
+        <div class="digit">
+            <p class="current">-</p>
+            <p>0</p>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+            <p>6</p>
+            <p>7</p>
+            <p>8</p>
+            <p>9</p>
+        </div>
+        <div class="digit">
+            <p class="current">-</p>
+            <p>0</p>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+            <p>6</p>
+            <p>7</p>
+            <p>8</p>
+            <p>9</p>
+        </div>
+        <div class="digit">
+            <p class="current">-</p>
+            <p>0</p>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+            <p>6</p>
+            <p>7</p>
+            <p>8</p>
+            <p>9</p>
+        </div>
+        <div class="digit">
+            <p class="current">-</p>
+            <p>0</p>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+            <p>6</p>
+            <p>7</p>
+            <p>8</p>
+            <p>9</p>
+        </div>
+        <div class="digit gap">
+            <p class="current">-</p>
+            <p>0</p>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+            <p>6</p>
+            <p>7</p>
+            <p>8</p>
+            <p>9</p>
+        </div>
+        <div class="digit">
+            <p class="current">-</p>
+            <p>0</p>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+            <p>6</p>
+            <p>7</p>
+            <p>8</p>
+            <p>9</p>
+        </div>
+        <p>:</p>
+        <div class="digit">
+            <p class="current">-</p>
+            <p>0</p>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+            <p>6</p>
+            <p>7</p>
+            <p>8</p>
+            <p>9</p>
+        </div>
+        <div class="digit">
+            <p class="current">-</p>
+            <p>0</p>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+            <p>6</p>
+            <p>7</p>
+            <p>8</p>
+            <p>9</p>
+        </div>
+        <p>:</p>
+        <div class="digit">
+            <p class="current">-</p>
+            <p>0</p>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+            <p>6</p>
+            <p>7</p>
+            <p>8</p>
+            <p>9</p>
+        </div>
+        <div class="digit">
+            <p class="current">-</p>
+            <p>0</p>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+            <p>6</p>
+            <p>7</p>
+            <p>8</p>
+            <p>9</p>
+        </div>
+    </div>
+    <button class="svg-btn time-panel-delete">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
+            <path fill="currentColor"
+                d="M208.49 191.51a12 12 0 0 1-17 17L128 145l-63.51 63.49a12 12 0 0 1-17-17L111 128L47.51 64.49a12 12 0 0 1 17-17L128 111l63.51-63.52a12 12 0 0 1 17 17L145 128Z" />
+        </svg>
+    </button>
+    `
+    return element;
+}
+
+function updatePanels() {
+    let currentTime = new Date().getTime();
+    futureEventsArr.arr = futureEventsArr.arr.sort((a, b) => a.time - b.time);
+    for (let i = 0; i < futureEventsArr.arr.length; i++) {
+        const event = futureEventsArr.arr[i];
+        if (event.time < currentTime) {
+            futureEventsArr.arr.splice(i, 1);
+            pastEventsArr.push(event);
+        } else {
+            break;
+        }
+    }
+    pastEventsArr.arr = pastEventsArr.arr.sort((a, b) => a.time - b.time);
+    futureEventsArr.update();
+    pastEventsArr.update();
+}
+
 function checkEventValid() {
     if (eventTitleInput.value && eventTimeInput.value) {
         submitEventBtn.classList.remove('invalid');
