@@ -7,6 +7,8 @@ const backdrop = document.querySelector('.backdrop');
 const submitEventBtn = document.getElementById('submit-event-btn');
 const eventTitleInput = document.getElementById('event-title-input');
 const eventTimeInput = document.getElementById('event-time-input');
+const futureEventsContainer = document.getElementById('future-events');
+const pastEventsContainer = document.getElementById('past-events');
 
 class StoredValue {
     constructor(localStorageName, defaultValue = false, updateCallback = (self) => { }) {
@@ -129,7 +131,7 @@ function getPastPanel() {
     let element = document.createElement('div');
     element.classList.add('time-panel', 'sub')
     element.innerHTML = `
-    <h4 class="time-panel-title">Exam Results</h4>
+    <h4 class="time-panel-title"></h4>
     <button class="svg-btn time-panel-delete">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
             <path fill="currentColor"
@@ -289,7 +291,12 @@ function getFuturePanel() {
     return element;
 }
 
+function deletePanel(id) {
+    console.log(id);
+}
+
 function updatePanels() {
+    // sort and transfer events
     let currentTime = new Date().getTime();
     futureEventsArr.arr = futureEventsArr.arr.sort((a, b) => a.time - b.time);
     for (let i = 0; i < futureEventsArr.arr.length; i++) {
@@ -304,6 +311,42 @@ function updatePanels() {
     pastEventsArr.arr = pastEventsArr.arr.sort((a, b) => a.time - b.time);
     futureEventsArr.update();
     pastEventsArr.update();
+
+    // fix element count
+    let futureDiff = futureEventsArr.arr.length - futureEventsContainer.childElementCount - 1;
+    if (futureDiff > 0) {
+        for (let i = 0; i < futureDiff; i++) {
+            futureEventsContainer.appendChild(getFuturePanel());
+        }
+    } else if (futureDiff < 0) {
+        let children = futureEventsContainer.children
+        for (let i = 0; i < Math.abs(futureDiff); i++) {
+            futureEventsContainer.removeChild(children[i]);
+        }
+    }
+    let pastDiff = pastEventsArr.arr.length - pastEventsContainer.childElementCount;
+    if (pastDiff > 0) {
+        for (let i = 0; i < pastDiff; i++) {
+            pastEventsContainer.appendChild(getPastPanel());
+        }
+    } else if (pastDiff < 0) {
+        let children = pastEventsContainer.children
+        for (let i = 0; i < Math.abs(pastDiff); i++) {
+            pastEventsContainer.removeChild(children[i]);
+        }
+    }
+
+    // update time time, title, time
+    futureEventsArr.arr.forEach((event, index) => {
+        if (index == 0) {
+            document.querySelector('.time-panel.main .time-panel-title').textContent = event.title;
+        } else {
+            document.querySelectorAll('#future-events .time-panel.sub .time-panel-title')[index - 1].textContent = event.title;
+        }
+    });
+    pastEventsArr.arr.forEach((event, index) => {
+        document.querySelectorAll('#past-events .time-panel.sub .time-panel-title')[index].textContent = event.title;
+    });
 }
 
 function checkEventValid() {
@@ -356,4 +399,6 @@ if (navigator.userAgent.includes('Firefox')) {
         element.classList.add('scroll-moz');
     });
 }
+
+updatePanels();
 // main run
