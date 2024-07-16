@@ -111,14 +111,19 @@ function getRemainingTime(currentDate, targetDate) {
     if (targetDate < currentDate) {
         return null;
     }
-    const difference = targetDate.getTime() - currentDate.getTime();
+    const difference = targetDate - currentDate;
 
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
     const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    return [days, hours, minutes, seconds];
+    let arr = days.toString().padStart(4, ' ').split('');
+    arr = arr.concat(hours.toString().padStart(2, '0').split(''));
+    arr = arr.concat(minutes.toString().padStart(2, '0').split(''));
+    arr = arr.concat(seconds.toString().padStart(2, '0').split(''));
+
+    return arr;
 }
 
 let futureEventsArr = new StoredArray('futureEvents');
@@ -253,33 +258,6 @@ function getFuturePanel() {
             <p>8</p>
             <p>9</p>
         </div>
-        <p>:</p>
-        <div class="digit">
-            <p class="current">-</p>
-            <p>0</p>
-            <p>1</p>
-            <p>2</p>
-            <p>3</p>
-            <p>4</p>
-            <p>5</p>
-            <p>6</p>
-            <p>7</p>
-            <p>8</p>
-            <p>9</p>
-        </div>
-        <div class="digit">
-            <p class="current">-</p>
-            <p>0</p>
-            <p>1</p>
-            <p>2</p>
-            <p>3</p>
-            <p>4</p>
-            <p>5</p>
-            <p>6</p>
-            <p>7</p>
-            <p>8</p>
-            <p>9</p>
-        </div>
     </div>
     <button class="svg-btn time-panel-delete">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
@@ -289,10 +267,6 @@ function getFuturePanel() {
     </button>
     `
     return element;
-}
-
-function deletePanel(id) {
-    console.log(id);
 }
 
 function updatePanels() {
@@ -340,12 +314,34 @@ function updatePanels() {
     futureEventsArr.arr.forEach((event, index) => {
         if (index == 0) {
             document.querySelector('.time-panel.main .time-panel-title').textContent = event.title;
+            document.querySelector('.time-panel.main .time-panel-delete').onclick = () => {
+                futureEventsArr.remove(
+                    futureEventsArr.arr.find(obj => obj.id === event.id));
+                updatePanels();
+            };
+            setClock(
+                document.querySelectorAll('.time-panel.main .time-panel-content .digit'),
+                getRemainingTime(currentTime, event.time)
+            );
         } else {
             document.querySelectorAll('#future-events .time-panel.sub .time-panel-title')[index - 1].textContent = event.title;
+            document.querySelectorAll('#future-events .time-panel.sub .time-panel-delete')[index - 1].onclick = () => {
+                futureEventsArr.remove(futureEventsArr.arr.find(obj => obj.id === event.id));
+                updatePanels();
+            };
+            setClock(
+                document.querySelectorAll('#future-events .time-panel.sub')[index - 1]
+                    .querySelectorAll('.time-panel-content .digit'),
+                getRemainingTime(currentTime, event.time)
+            );
         }
     });
     pastEventsArr.arr.forEach((event, index) => {
         document.querySelectorAll('#past-events .time-panel.sub .time-panel-title')[index].textContent = event.title;
+        document.querySelectorAll('#past-events .time-panel.sub .time-panel-delete')[index].onclick = () => {
+            pastEventsArr.remove(pastEventsArr.arr.find(obj => obj.id === event.id));
+            updatePanels();
+        };
     });
 }
 
